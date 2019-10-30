@@ -3,38 +3,38 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "peer": {
-           "type": "bool",
-           "defaultValue": true
+            "type": "bool",
+            "defaultValue": true
         },
         "hub": {
-           "type": "object",
-           "defaultValue": {
-               "resourceGroup": "koreacentral",
-               "vnet": {
-                   "name": "hub"
-               }
-           }
+            "type": "object",
+            "defaultValue": {
+                "resourceGroup": "koreacentral",
+                "vnet": {
+                    "name": "hub"
+                }
+            }
         },
         "spoke": {
-           "type": "object",
-           "defaultValue": {
-               "vnet": {
-                   "name": "example-vnet",
-                   "addressPrefixes": [
-                       "10.20.0.0/16"
-                   ]
-               },
-               "subnets": [
-                   {
-                       "addressPrefix": "10.20.1.0/24",
-                       "name": "example-vnet-subnet1"
-                   },
-                   {
-                       "addressPrefix": "10.20.2.0/24",
-                       "name": "example-vnet-subnet2"
-                   }
-               ]
-           }
+            "type": "object",
+            "defaultValue": {
+                "vnet": {
+                    "name": "example-vnet",
+                    "addressPrefixes": [
+                        "10.20.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "addressPrefix": "10.20.1.0/24",
+                        "name": "example-vnet-subnet1"
+                    },
+                    {
+                        "addressPrefix": "10.20.2.0/24",
+                        "name": "example-vnet-subnet2"
+                    }
+                ]
+            }
         }
     },
     "variables": {},
