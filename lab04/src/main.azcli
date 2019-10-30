@@ -1,0 +1,16 @@
+rg=$(az group create --name outputLab4 --location koreacentral --query name --out tsv)
+template=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab04/template/lab4_deploy.json
+param=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab04/template/lab4_deploy.parameter.json
+job=job.($date --utc +%Y%m%d/%H%M)
+outputs=$(az group deployment create --parameters "@$param" \
+--template-file $template \
+--name $job \
+--resource-group $rg \
+--query properties.outputs \
+--output json)
+
+hostName=$(jq -r .hostname.value <<< $outputs)
+
+az group deployment list --resource-group outputLab4 --output table
+az group deployment show --resource-group outputLab4 --name "job.20191029.0444" \
+--output jsonc --query properties.outputs.vmRef.value

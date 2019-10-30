@@ -1,0 +1,12 @@
+rg=$(az group create --name outputLab2 --location koreacentral --query name --out tsv)
+template=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab03/template/lab3_deploy.json
+param=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab03/template/lab3_deploy.parameter.json
+job=job.($date --utc +%Y%m%d/%H%M)
+outputs=$(az group deployment create --parameters "@$param" \
+--template-file $template \
+--name $job \
+--resource-group $rg \
+--query properties.outputs \
+--output json)
+
+hostName=$(jq -r .hostname.value <<< $outputs)

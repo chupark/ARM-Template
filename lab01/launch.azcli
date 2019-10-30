@@ -1,0 +1,16 @@
+job=job1
+rg=cwArmLab1
+template=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab01/lab1.json
+param="storageAccount=pcwlabb3 accountType=Premium_LRS"
+az group deployment create --name $job --parameters $param --template-file $template --resource-group $rg
+
+# validate
+az group deployment validate --template-file $template --resource-group $rg --parameters $param 
+
+rg=cwArmLab1
+job=job.$(date --utc +"%Y%m%d.%H%M")
+template=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab01/lab1.json
+param="storageAccountPrefix=pcw1"
+query='properties.outputs.storageAccount.value'
+storageAccount=$(az group deployment create --query "$query" --parameters $param -template-file $template -name $job --resource-group $rg --out tsv)
+

@@ -1,0 +1,9 @@
+rg=armLab2
+template=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab02/template/lab2.json
+param=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab02/template/lab2.parameter.json
+job=job.($date --utc +%Y%m%d/%H%M)
+az group deployment create --parameters $param \
+--template-file $template \
+--name $job \
+--resource-group $rg \
+--output tsv
