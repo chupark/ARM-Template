@@ -43,5 +43,20 @@ Azure Resource는 리소스 이름 등 개별 리소스 마다 네이밍 종속�
 ARM Template의 조건문은 if와 Condition이 있다. 두 함수는 서로 다른기능이므로 구분할 필요가 있다.
 
 ## ARM 반복문'
+- copyIndex() 함수를 사용하여 리소스의 dynamic 네이밍이 가능함
 - 리소스 이터레이션
 - Property 이터레이션 반드시 반복할 property의 이름을 입력해야함 --> copyindex 에도 같은 이름을 넣어야 함
+
+## 템플릿 연결 - 중첩배포, 모듈화
+애플리케이션 개발과 마찬가지로 템플릿을 리소스별로 만들어서 모듈화를 할 수 있음
+- 여러 템플릿을 연결하는 기능을 제공
+-- 템플릿 링킹 이라고 함
+- Decomposition을 활용하는데 사용할 수 있음
+- templateUri는 동적일 수 있음
+- 재 사용 가능
+
+
+## 팁
+긴 템플릿을 만들 때 resource를 만들지 말고 outputs으로 먼저 테스트를 한다.
+- parameter가 정상적으로 입력되었는지 체크
+- variables가 정상적으로 입력되었는지 체크

@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "value": "qkrcldn12"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/814b80ef-928b-4f54-87c6-35df36270a65/resourceGroups/RG-KeyStore/providers/Microsoft.KeyVault/vaults/pcw-keystore"
+                },
+                "secretName": "ubuntuDefaultPassword"
+            }
+        },
+        "vnetName": {
+            "value": "ubuntuVnet"
+        },
+        "subnetName": {
+            "value": "ubuntuSubnet1"
+        }
+    }
+}

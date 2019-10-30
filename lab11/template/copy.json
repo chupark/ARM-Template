@@ -37,7 +37,21 @@
             }
         }
     },
-    "variables": {},
+    "variables": {
+        "hubId": "[if(parameters('peer'), resourceId(parameters('hub').resourceGroup, 'Microsoft.Network/virtualNetworks/', parameters('hub').vnet.name), '')]",
+        "spokeId": "[resourceId('Microsoft.Networks/virtualNetworks/', parameters('spoke').vnet.name)]",
+        "copy": [
+            {
+                "name": "subnets",
+                "count": "[length(parameters('spoke').subnets)]",
+                "input": {
+                    "name": "[parameters('spoke').subnets[copyIndex('subnets')].name]",
+                    "addressPrefix": "[parameters('spoke').subnets[copyIndex('subnet')].addressPrefix]",
+                    "id": "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('spoke').vnet.name), '/subnets/', parameters('spoke').subnets[copyIndex('subnets')].name)]"
+                }
+            }
+        ]
+    },
     "resources": [],
     "outputs": {
         "peer": {

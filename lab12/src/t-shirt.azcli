@@ -1,0 +1,8 @@
+
+template=/mnt/c/Users/qkrcldn12/Desktop/Azure/ARM-Template/lab12/template/t-shirt.json
+
+job=job.$(date --utc "+%Y%m%d.%H%M")
+outputs=$(az group deployment create --name $job \
+--template-file $template \
+--resource-group armLab11 \
+--output json)
