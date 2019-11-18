@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_VM_ChangeAvailSet_name": {
+            "defaultValue": "VM-ChangeAvailSet",
+            "type": "String"
+        },
+        "availabilitySets_AVAILSET_externalid": {
+            "defaultValue": "[resourceId('Microsoft.Compute/availabilitySets', 'AvailSet')]",
+            "type": "String"
+        },
+        "disks_VM_ChangeAvailSet_OsDisk_1_6c58c6e6f9994c6f9dfec409f748a817_externalid": {
+            "defaultValue": "[resourceId('Microsoft.Compute/disks', 'VM-ChangeAvailSet_OsDisk_1_6c58c6e6f9994c6f9dfec409f748a817')]",
+            "type": "String"
+        },
+        "networkInterfaces_vm_changeavailset264_externalid": {
+            "defaultValue": "[resourceId('Microsoft.Network/networkInterfaces', 'vm-changeavailset264')]",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-03-01",
+            "name": "[parameters('virtualMachines_VM_ChangeAvailSet_name')]",
+            "location": "koreacentral",
+            "properties": {
+                "availabilitySet": {
+                    "id": "[parameters('availabilitySets_AVAILSET_externalid')]"
+                },
+                "hardwareProfile": {
+                    "vmSize": "Standard_B1ms"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('virtualMachines_VM_ChangeAvailSet_name'), '_OsDisk_1_6c58c6e6f9994c6f9dfec409f748a817')]",
+                        "createOption": "Attach",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS",
+                            "id": "[parameters('disks_VM_ChangeAvailSet_OsDisk_1_6c58c6e6f9994c6f9dfec409f748a817_externalid')]"
+                        },
+                        "diskSizeGB": 30
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_vm_changeavailset264_externalid')]"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
